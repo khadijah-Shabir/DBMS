@@ -1,0 +1,81 @@
+SQLite version 3.45.1 2024-01-30 16:01:20 (UTF-16 console I/O)
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> CREATE TABLE employee(empId char(4),empname varchar(30),empfName varchar(30), empage int, empsal int, empdept char(4));
+sqlite> INSERT INTO employee VALUES('E001','Ali ahmad','Ahmad Hassan',27,70000,'D003');
+sqlite> INSERT INTO employee VALUES('E002','Sana javed','Javed Ahmad',21,60000,'D001');
+sqlite> INSERT INTO employee VALUES('E003','Kamran Ali','Ali Ahmad',24,75000,'D002');
+sqlite> INSERT INTO employee VALUES('E004','Kashif Ali','Ali Kamran',25,80000,'D001');
+sqlite> INSERT INTO employee VALUES('E005','Hina Munir','Munir Ahmad',22,65000,'D004');
+sqlite> INSERT INTO employee VALUES('E006','Hamna Ali','Hassan Ali',27,75000,'D002');
+sqlite> INSERT INTO employee VALUES('E007','Obaid Ali','Ali Ahmad',32,90000,'D001');
+sqlite> INSERT INTO employee VALUES('E008','Muhammad Kamran','Kamran Ali',35,95000,'D004');
+sqlite> INSERT INTO employee VALUES('E009','Muhammad Ali','Ali Hassan',21,55000,'D001');
+sqlite> .header on
+sqlite> .mode column
+sqlite> SELECT*FROM employee;
+empId  empname          empfName      empage  empsal  empdept
+-----  ---------------  ------------  ------  ------  -------
+E001   Ali ahmad        Ahmad Hassan  27      70000   D003
+E002   Sana javed       Javed Ahmad   21      60000   D001
+E003   Kamran Ali       Ali Ahmad     24      75000   D002
+E004   Kashif Ali       Ali Kamran    25      80000   D001
+E005   Hina Munir       Munir Ahmad   22      65000   D004
+E006   Hamna Ali        Hassan Ali    27      75000   D002
+E007   Obaid Ali        Ali Ahmad     32      90000   D001
+E008   Muhammad Kamran  Kamran Ali    35      95000   D004
+E009   Muhammad Ali     Ali Hassan    21      55000   D001
+sqlite> CREATE TABLE dept(deptid char(4), deptname varchar(30),deptloc varchar(30));
+sqlite> INSERT INTO dept VALUES('D001', 'Sales', 'Lahore');
+sqlite> INSERT INTO dept VALUES('D002','Purchase','Lahore');
+	sqlite> INSERT INTO dept VALUES('D003','Marketting', 'Islamabad');
+sqlite> INSERT INTO dept VALUES('D004','HR', 'Karachi');
+sqlite> .header on
+sqlite> .mode column
+sqlite> SELECT*FROM dept;
+deptid  deptname    deptloc
+------  ----------  ---------
+D001    Sales       Lahore
+D002    Purchase    Lahore
+D003    Marketting  Islamabad
+D004    HR          Karachi
+sqlite> SELECT empname FROM employee WHERE empsal = (SELECT MAX(empsal) FROM employee);
+empname
+---------------
+Muhammad Kamran
+
+sqlite> SELECT empID,empname,empsal FROM employee where empdept=(SELECT deptid FROM dept WHERE deptloc='Karachi');
+empId  empname          empsal
+-----  ---------------  ------
+E005   Hina Munir       65000
+E008   Muhammad Kamran  95000
+sqlite> SELECT empID,empname,empsal FROM employee where empdept=(SELECT deptid FROM dept WHERE deptloc='Lahore');
+empId  empname       empsal
+-----  ------------  ------
+E002   Sana javed    60000
+E004   Kashif Ali    80000
+E007   Obaid Ali     90000
+E009   Muhammad Ali  55000
+sqlite>  SELECT empID,empname,empsal FROM employee where empdept=(SELECT deptid FROM dept WHERE deptloc='Lahore');
+empId  empname       empsal
+-----  ------------  ------
+E002   Sana javed    60000
+E004   Kashif Ali    80000
+E007   Obaid Ali     90000
+E009   Muhammad Ali  55000
+sqlite> SELECT empID,empname,empsal FROM employee where empdept=(SELECT deptid FROM dept WHERE deptloc='Karachi');
+empId  empname          empsal
+-----  ---------------  ------
+E005   Hina Munir       65000
+E008   Muhammad Kamran  95000
+sqlite>  SELECT empID,empname,empsal FROM employee where empdept IN (SELECT deptid FROM dept WHERE deptloc='Lahore');
+empId  empname       empsal
+-----  ------------  ------
+E002   Sana javed    60000
+E003   Kamran Ali    75000
+E004   Kashif Ali    80000
+E006   Hamna Ali     75000
+E007   Obaid Ali     90000
+E009   Muhammad Ali  55000
+sqlite>

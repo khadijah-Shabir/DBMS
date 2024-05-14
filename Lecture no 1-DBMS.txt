@@ -1,0 +1,28 @@
+SQLite version 3.45.1 2024-01-30 16:01:20 (UTF-16 console I/O)
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> CREATE TABLE student(name varchar(30),rollno int, marks int, cgpa float);
+sqlite> INSERT INTO student VALUES('Ali',101,75,3.5);
+sqlite> INSERT INTO student VALUES('Ahmad',102,85,3.7);
+sqlite>  INSERT INTO student VALUES('Sana',103,95,3.9);
+sqlite> INSERT INTO student VALUES('Hina',104,74,2.8);
+sqlite> INSERT INTO student VALUES('Adeel',105,88,3.2);
+sqlite> .echo on
+sqlite>  INSERT INTO student VALUES('Adeel',105,88,3.2);
+INSERT INTO student VALUES('Adeel',105,88,3.2);
+sqlite> .header on
+.header on
+sqlite> .mode column
+.mode column
+sqlite> SELECT*FROM student;
+SELECT*FROM student;
+name   rollno  marks  cgpa
+-----  ------  -----  ----
+Ali    101     75     3.5
+Ahmad  102     85     3.7
+Sana   103     95     3.9
+Hina   104     74     2.8
+Adeel  105     88     3.2
+Adeel  105     88     3.2
+sqlite>

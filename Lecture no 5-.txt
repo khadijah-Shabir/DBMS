@@ -1,0 +1,59 @@
+SQLite version 3.45.1 2024-01-30 16:01:20 (UTF-16 console I/O)
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> CREATE TABLE student(Sr_no int, roll_no int, name varchar(30),age int,program char(4),cgpa float);
+sqlite> INSERT INTO student VALUES(1,101,'Ali Kamran',22,'BSCS',3.92);
+sqlite> INSERT INTO student VALUES(2,102,'Sana Ali',21,'BSCS',3.54);
+sqlite> INSERT INTO student(Sr_no,roll_no,age,cgpa)VALUES(3,103,20,2.95);
+sqlite> INSERT INTO student(Sr_no,roll_no,name,program,cgpa)VALUES(4,104,'Kashif Ahmad','MSCS',3.22);
+sqlite> INSERT INTO student(Sr_no,roll_no,name,age)VALUES(5,105,'Ali javed',22);
+sqlite> INSERT INTO student(Sr_no,roll_no,program)VALUES(7,107,'BSSE');
+sqlite> INSERT INTO student(Sr_no,roll_no,name,age,cgpa)VALUES(8,108,'Aalia',20,2.57);
+sqlite> .header on
+sqlite> .mode column
+sqlite> SELECT*FROM student;
+Sr_no  roll_no  name          age  program  cgpa
+-----  -------  ------------  ---  -------  ----
+1      101      Ali Kamran    22   BSCS     3.92
+2      102      Sana Ali      21   BSCS     3.54
+3      103                    20            2.95
+4      104      Kashif Ahmad       MSCS     3.22
+5      105      Ali javed     22
+6      106      Hira Ahmad         BSIT
+7      107                         BSSE
+8      108      Aalia         20            2.57
+
+sqlite> SELECT MAX(cgpa) FROM student;
+MAX(cgpa)
+---------
+3.92
+sqlite> SELECT MAX(cgpa) AS max_cgpa FROM student;
+max_cgpa
+--------
+3.92
+sqlite> SELECT roll_no, age FROM student WHERE age = (SELECT MIN(age) FROM student);
+roll_no  age
+-------  ---
+103      20
+108      20
+
+sqlite> SELECT*FROM student WHERE AGE=(SELECT MIN(Age) FROM student);
+Sr_no  roll_no  name   age  program  cgpa
+-----  -------  -----  ---  -------  ----
+3      103             20            2.95
+8      108      Aalia  20            2.57
+sqlite> SELECT MIN(age), roll_no FROM student;
+MIN(age)  roll_no
+--------  -------
+20        103
+sqlite> SELECT MIN(cgpa),name FROM student;
+MIN(cgpa)  name
+---------  -----
+2.57       Aalia
+sqlite> SELECT MIN(cgpa),name FROM student WHERE program='BSCS';
+MIN(cgpa)  name
+---------  --------
+3.54       Sana Ali
+
+sqlite> SELECT cgpa FROM student WHERE name LIKE '%Ali%;

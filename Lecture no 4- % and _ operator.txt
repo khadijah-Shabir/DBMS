@@ -1,0 +1,89 @@
+SQLite version 3.45.1 2024-01-30 16:01:20 (UTF-16 console I/O)
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> CREATE TABLE employee(empId char(4),empname varchar(30),empfName varchar(30), empage int, empsal int, empdept char(4));
+sqlite> INSERT INTO employee VALUES('E001','Ali ahmad','Ahmad Hassan',27,70000,'D003');
+sqlite> INSERT INTO employee VALUES('E002','Sana javed','Javed Ahmad',21,60000,'D001');
+sqlite> INSERT INTO employee VALUES('E003','Kamran Ali','Ali Ahmad',24,75000,'D002');
+sqlite> INSERT INTO employee VALUES('E004','Kashif Ali','Ali Kamran',25,80000,'D001');
+sqlite>  INSERT INTO employee VALUES('E005','Hina Munir','Munir Ahmad',22,65000,'D004');
+sqlite> INSERT INTO employee VALUES('E006','Hamna Ali','Hassan Ali',27,75000,'D002');
+sqlite> INSERT INTO employee VALUES('E007','Obaid Ali','Ali Ahmad',32,90000,'D001');
+sqlite> INSERT INTO employee VALUES('E008','Muhammad Kamran','Kamran Ali',35,95000,'D004');
+sqlite> INSERT INTO employee VALUES('E009','Muhammad Ali','Ali Hassan',21,55000,'D001');
+sqlite> .header on
+sqlite> .mode comumn
+sqlite> SELECT*FROM employee;
+empId  empname          empfName      empage  empsal  empdept
+-----  ---------------  ------------  ------  ------  -------
+E001   Ali ahmad        Ahmad Hassan  27      70000   D003
+E002   Sana javed       Javed Ahmad   21      60000   D001
+E003   Kamran Ali       Ali Ahmad     24      75000   D002
+E004   Kashif Ali       Ali Kamran    25      80000   D001
+E005   Hina Munir       Munir Ahmad   22      65000   D004
+E006   Hamna Ali        Hassan Ali    27      75000   D002
+E007   Obaid Ali        Ali Ahmed     32      90000   D001
+E008   Muhammad Kamran  Kamran Ali    35      95000   D004
+E009   Muhammad Ali     Ali Hassan    21      55000   D001
+
+sqlite>  SELECT empname,empfName,empsal FROM employee WHERE empfName LIKE '%Ahmad';
+empfName    empsal
+----------  ------
+Sana javed  60000 
+Kamran Ali  75000
+Hina Munir  65000
+
+sqlite> SELECT empname,empage FROM employee  WHERE empfName LIKE '%a_';
+empname       empage
+------------  ------
+Ali ahmad     27
+Sana javed    21
+Kamran Ali    24
+Kashif Ali    25
+Hina Munir    22
+Muhammad Ali  21
+sqlite> SELECT empid, empsal FROM employee WHERE empname LIKE 'H%' AND empfName LIKE '%d';
+empId  empsal
+-----  ------
+E005   65000
+
+sqlite> SELECT empname,empage FROM employee WHERE empname LIKE '__h%';
+empname          empage
+---------------  ------
+Muhammad Kamran  35
+Muhammad Ali     21
+
+sqlite> SELECT empname,empage FROM employee WHERE empname LIKE '__n%';
+empname     empage
+----------  ------
+Sana javed  21
+Hina Munir  22
+sqlite> SELECT empname, empdept FROM employee WHERE empname LIKE '_________';
+
+empname    empdept
+---------  -------
+Ali ahmad  D003
+Hamna Ali  D002
+Obaid Ali  D001
+sqlite> SELECT*FROM employee;
+empId  empname          empfName      empage  empsal  empdept
+-----  ---------------  ------------  ------  ------  -------
+E001   Ali ahmad        Ahmad Hassan  27      70000   D003
+E002   Sana javed       Javed Ahmad   21      60000   D001
+E003   Kamran Ali       Ali Ahmad     24      75000   D002
+E004   Kashif Ali       Ali Kamran    25      80000   D001
+E005   Hina Munir       Munir Ahmad   22      65000   D004
+E006   Hamna Ali        Hassan Ali    27      75000   D002
+E007   Obaid Ali        Ali Ahmed     32      90000   D001
+E008   Muhammad Kamran  Kamran Ali    35      95000   D004
+E009   Muhammad Ali     Ali Hassan    21      55000   D001
+sqlite>  SELECT empname, empdept FROM employee WHERE empname LIKE '__________';
+empname     empdept
+----------  -------
+Sana javed  D001
+Kamran Ali  D002
+Kashif Ali  D001
+Hina Munir  D004
+sqlite> SELECT empname,empfName, empage FROM employee WHERE empname LIKE 'Ali%' AND empfName LIKE '%Ali';
+sqlite>

@@ -1,0 +1,43 @@
+
+
+sqlite> CREATE TABLE student(rollno int,name varchar(30),regno char(15),program string);
+
+sqlite> INSERT INTO student VALUES(101,'Reeba', '02317-GCUF-2022','BSCS');
+
+sqlite> INSERT INTO student(rollno int, name varchar(30),program string) VALUES(102,'Ali','BSIT');
+
+
+sqlite> INSERT INTO student(rollno,name,program) VALUES(102,'Ali','BSIT');
+
+sqlite> INSERT INTO student(rollno,name,program) VALUES(103,'Ahmad','BSSE');
+
+sqlite> INSERT INTO Student(rollno,name,regno) VALUES(104,'M.Farooq','2022-GCUF-02300');
+
+sqlite> INSERT INTO Student VALUES(105,'Sheraz Hussain','2022-GCUF-02304','BSCS');
+
+sqlite> INSERT INTO Student(rollno, name) VALUES(106,'Adeel Afzal');
+
+sqlite> .header on
+
+sqlite> SELECT*FROM student;
+
+rollno|name|regno|program
+101|Reeba|02317-GCUF-2022|BSCS
+102|Ali||BSIT
+103|Ahmad||BSSE
+104|M.Farooq|2022-GCUF-02300|
+105|Sheraz Hussain|2022-GCUF-02304|BSCS
+106|Adeel Afzal||
+sqlite> .mode column
+
+sqlite> SELECT*FROM student;
+
+rollno  name            regno            program
+------  --------------  ---------------  -------
+101     Reeba           02317-GCUF-2022  BSCS
+102     Ali                              BSIT
+103     Ahmad                            BSSE
+104     M.Farooq        2022-GCUF-02300
+105     Sheraz Hussain  2022-GCUF-02304  BSCS
+106     Adeel Afzal
+sqlite>
